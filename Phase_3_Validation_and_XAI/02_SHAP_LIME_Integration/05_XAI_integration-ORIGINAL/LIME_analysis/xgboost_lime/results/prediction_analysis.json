@@ -1,9 +1,0 @@
-{
-  "overall_accuracy": 1.0,
-  "average_confidence": 0.4989876672085042,
-  "normal_traffic_confidence": 0.003821979567874223,
-  "attack_traffic_confidence": 0.9941533548491341,
-  "total_samples_analyzed": 14,
-  "correct_predictions": 14,
-  "analysis_timestamp": "2025-09-17T15:25:43.207985"
-}
