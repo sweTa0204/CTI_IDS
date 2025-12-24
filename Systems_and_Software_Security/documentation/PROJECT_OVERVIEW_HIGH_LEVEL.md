@@ -4,8 +4,8 @@
 
 This document provides a simplified, high-level overview of our DDoS Mitigation System. It focuses on the 4 main phases of our project.
 
-**Team Name:** CyberShield  
-**Members:** Shweta Sharma, Devika, Aakash  
+**Team Name:** Threat Hunters  
+**Members:** Shweta Sharma, Devika, Akash  
 **Challenge:** CSIC 1.0 - Systems & Software Security  
 **Document Created:** December 22, 2025
 
@@ -454,4 +454,4 @@ Result: System becomes FASTER as it learns more patterns!
 
 *Document Version: 1.0*  
 *Last Updated: December 22, 2025*  
-*For: CyberShield Team - CSIC 1.0 Challenge*
+*For: Threat Hunters Team - CSIC 1.0 Challenge*

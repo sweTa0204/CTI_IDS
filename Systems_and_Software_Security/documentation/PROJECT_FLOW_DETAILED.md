@@ -4,7 +4,7 @@
 
 This document explains the complete flow of our DDoS Mitigation System from start to finish. It is designed for team members who are looking at this project for the first time.
 
-**Team Name:** CyberShield  
+**Team Name:** Threat Hunters  
 **Members:** Shweta Sharma, Devika, Aakash  
 **Challenge:** CSIC 1.0 - Systems & Software Security  
 **Document Created:** December 22, 2025
@@ -810,4 +810,4 @@ ML Model: Never even sees it!
 
 *Document Version: 1.0*  
 *Last Updated: December 22, 2025*  
-*For: CyberShield Team - CSIC 1.0 Challenge*
+*For: Threat Hunters Team - CSIC 1.0 Challenge*
