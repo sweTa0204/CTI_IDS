@@ -1,0 +1,36 @@
+{
+    "model_name": "MLP (Multi-Layer Perceptron)",
+    "training_date": "2025-09-17 14:33:43.137692",
+    "best_parameters": {
+        "activation": "relu",
+        "alpha": 0.01,
+        "hidden_layer_sizes": [
+            150,
+            75,
+            25
+        ],
+        "learning_rate_init": 0.01,
+        "max_iter": 500,
+        "random_state": 42,
+        "early_stopping": true,
+        "validation_fraction": 0.1,
+        "n_iter_no_change": 10
+    },
+    "performance_metrics": {
+        "accuracy": 0.9248166259168704,
+        "precision": 0.96271637816245,
+        "recall": 0.8838630806845966,
+        "f1_score": 0.9216061185468452,
+        "roc_auc": 0.9735370424614871,
+        "cv_f1_score": 0.9192097528376074
+    },
+    "training_time_seconds": 1.5690338611602783,
+    "tuning_time_seconds": 26.626200675964355,
+    "network_architecture": {
+        "hidden_layers": "(150, 75, 25)",
+        "total_parameters": 14901,
+        "activation_function": "relu",
+        "solver": "adam",
+        "iterations_to_convergence": 31
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "features": [
+        "rate",
+        "sload",
+        "sbytes",
+        "dload",
+        "proto",
+        "dtcpb",
+        "stcpb",
+        "dmean",
+        "tcprtt",
+        "dur"
+    ],
+    "coefficients": [
+        0.7251175331615218,
+        -0.16107806014508846,
+        1.8419326496393735,
+        -11.10804009533299,
+        -0.3028300401139538,
+        -0.298665756219406,
+        -0.2117354276045869,
+        0.7710240112639095,
+        -0.5410675142588489,
+        0.1149291347031824
+    ],
+    "feature_importance": [
+        {
+            "feature": "dload",
+            "coefficient": -11.10804009533299,
+            "abs_coefficient": 11.10804009533299,
+            "importance": 0.6909523352609334
+        },
+        {
+            "feature": "sbytes",
+            "coefficient": 1.8419326496393735,
+            "abs_coefficient": 1.8419326496393735,
+            "importance": 0.1145735570576847
+        },
+        {
+            "feature": "dmean",
+            "coefficient": 0.7710240112639095,
+            "abs_coefficient": 0.7710240112639095,
+            "importance": 0.04795993141480286
+        },
+        {
+            "feature": "rate",
+            "coefficient": 0.7251175331615218,
+            "abs_coefficient": 0.7251175331615218,
+            "importance": 0.04510441523226978
+        },
+        {
+            "feature": "tcprtt",
+            "coefficient": -0.5410675142588489,
+            "abs_coefficient": 0.5410675142588489,
+            "importance": 0.03365596984728681
+        },
+        {
+            "feature": "proto",
+            "coefficient": -0.3028300401139538,
+            "abs_coefficient": 0.3028300401139538,
+            "importance": 0.018836907465954372
+        },
+        {
+            "feature": "dtcpb",
+            "coefficient": -0.298665756219406,
+            "abs_coefficient": 0.298665756219406,
+            "importance": 0.018577876920787703
+        },
+        {
+            "feature": "stcpb",
+            "coefficient": -0.2117354276045869,
+            "abs_coefficient": 0.2117354276045869,
+            "importance": 0.013170558163751026
+        },
+        {
+            "feature": "sload",
+            "coefficient": -0.16107806014508846,
+            "abs_coefficient": 0.16107806014508846,
+            "importance": 0.010019522873644575
+        },
+        {
+            "feature": "dur",
+            "coefficient": 0.1149291347031824,
+            "abs_coefficient": 0.1149291347031824,
+            "importance": 0.007148925762884703
+        }
+    ]
+}
