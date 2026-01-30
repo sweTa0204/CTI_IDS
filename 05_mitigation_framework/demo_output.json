@@ -1,0 +1,323 @@
+[
+  {
+    "alert_id": "ALERT_20260130084710_20459",
+    "timestamp": "2026-01-30T08:47:10.351193",
+    "record_id": 20459,
+    "detection": {
+      "prediction": "DoS",
+      "confidence": 0.9996,
+      "probability_dos": 0.9996,
+      "probability_normal": 0.0004
+    },
+    "network_info": {
+      "source_ip": "192.168.1.59",
+      "destination_ip": "10.0.0.1",
+      "interface": "eth0"
+    },
+    "xai_explanation": {
+      "method": "SHAP TreeExplainer",
+      "top_features": [
+        "proto",
+        "sload",
+        "sbytes"
+      ],
+      "shap_values": {
+        "rate": -0.0673,
+        "sload": 2.4836,
+        "sbytes": 0.7366,
+        "dload": 0.6995,
+        "proto": 4.0827,
+        "dtcpb": 0.0256,
+        "stcpb": 0.2405,
+        "dmean": -0.0978,
+        "tcprtt": -0.1031,
+        "dur": -0.1351
+      },
+      "feature_values": {
+        "rate": 1.594551427707281,
+        "sload": 1.1048479482897984,
+        "sbytes": -0.0498006531572834,
+        "dload": -0.3496682757665224,
+        "proto": 0.587847051413368,
+        "dtcpb": -0.6987034489775263,
+        "stcpb": -0.6983555077853986,
+        "dmean": -0.5377557951402568,
+        "tcprtt": -0.3643292188292704,
+        "dur": -0.2200998543376427
+      },
+      "base_value": 0.0032
+    },
+    "classification": {
+      "attack_type": "Protocol Exploit",
+      "attack_description": "Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)",
+      "classification_confidence": 1.0,
+      "primary_indicators": [
+        "proto"
+      ],
+      "reasoning": "Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: 4.08)",
+      "mitigation_category": "protocol_filtering"
+    },
+    "severity": {
+      "level": "CRITICAL",
+      "score": 1.0,
+      "description": "Very high confidence with severe indicators, auto-block recommended",
+      "escalation_required": true,
+      "reasoning": "Severity CRITICAL assigned due to: very high model confidence (100.0%), Protocol Exploit attack type (+5% severity), extreme feature contributions (+8%). Total severity score: 100.0%"
+    },
+    "mitigation": {
+      "required": true,
+      "auto_apply_recommended": true,
+      "primary_strategy": "Protocol-specific filtering and SYN cookies",
+      "immediate_actions": [
+        {
+          "name": "Enable SYN Cookies",
+          "description": "Enable kernel SYN cookies to prevent SYN flood",
+          "command": "echo 1 > /proc/sys/net/ipv4/tcp_syncookies"
+        },
+        {
+          "name": "Limit SYN Packets",
+          "description": "Limit SYN packets to prevent SYN flood",
+          "command": "iptables -A INPUT -s 192.168.1.59 -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT",
+          "followup": "iptables -A INPUT -s 192.168.1.59 -p tcp --syn -j DROP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Invalid TCP Flags",
+          "description": "Drop packets with invalid TCP flag combinations",
+          "commands": [
+            "iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP"
+          ]
+        },
+        {
+          "name": "ICMP Rate Limiting",
+          "description": "Limit ICMP packets to prevent ICMP flood",
+          "command": "iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 4 -j ACCEPT",
+          "followup": "iptables -A INPUT -p icmp -j DROP"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor SYN Backlog",
+          "description": "Check SYN queue statistics",
+          "command": "netstat -s | grep -i syn"
+        },
+        {
+          "name": "Capture Protocol Traffic",
+          "description": "Capture SYN packets for analysis",
+          "command": "tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn) != 0' -c 1000"
+        }
+      ]
+    },
+    "action_checklist": [
+      "Apply immediate mitigation (see commands below)",
+      "Alert security team",
+      "Escalate to SOC immediately",
+      "Consider auto-blocking",
+      "Monitor traffic for 5 minutes",
+      "Capture traffic for analysis if attack persists",
+      "Document incident in ticketing system"
+    ],
+    "human_explanation": "This traffic has been classified as a DoS attack with 100.0% confidence.\n\nWHY THIS IS FLAGGED AS AN ATTACK:\n  1. proto = 0.59 (SHAP: +4.08) - increases attack likelihood\n  2. sload = 1.10 (SHAP: +2.48) - increases attack likelihood\n  3. sbytes = -0.05 (SHAP: +0.74) - increases attack likelihood\n\nATTACK TYPE: Protocol Exploit\n  Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)\n\nSEVERITY: CRITICAL\n  Very high confidence with severe indicators, auto-block recommended\n  [!] ESCALATION REQUIRED\n\nRECOMMENDED ACTION:\n  Protocol-specific filtering and SYN cookies",
+    "actual_label": "DoS"
+  },
+  {
+    "alert_id": "ALERT_20260130084710_13908",
+    "timestamp": "2026-01-30T08:47:10.353380",
+    "record_id": 13908,
+    "detection": {
+      "prediction": "DoS",
+      "confidence": 0.5453,
+      "probability_dos": 0.5453,
+      "probability_normal": 0.4547
+    },
+    "network_info": {
+      "source_ip": "192.168.1.138",
+      "destination_ip": "10.0.0.1",
+      "interface": "eth0"
+    },
+    "xai_explanation": {
+      "method": "SHAP TreeExplainer",
+      "top_features": [
+        "tcprtt",
+        "proto",
+        "sbytes"
+      ],
+      "shap_values": {
+        "rate": 0.089,
+        "sload": -0.4363,
+        "sbytes": -0.5435,
+        "dload": -0.1482,
+        "proto": -0.5895,
+        "dtcpb": 0.0243,
+        "stcpb": -0.0355,
+        "dmean": 0.1605,
+        "tcprtt": 1.6078,
+        "dur": 0.0498
+      },
+      "feature_values": {
+        "rate": -0.5259368048825722,
+        "sload": -0.429256873562162,
+        "sbytes": -0.0468554422271347,
+        "dload": -0.3486912749780556,
+        "proto": 0.3551681526691493,
+        "dtcpb": -0.5603381880212374,
+        "stcpb": 1.216498492588965,
+        "dmean": -0.3743211350595822,
+        "tcprtt": 0.6504154041127346,
+        "dur": -0.1444287460436803
+      },
+      "base_value": 0.0032
+    },
+    "classification": {
+      "attack_type": "Protocol Exploit",
+      "attack_description": "Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)",
+      "classification_confidence": 0.4,
+      "primary_indicators": [
+        "proto"
+      ],
+      "reasoning": "Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: -0.59)",
+      "mitigation_category": "protocol_filtering"
+    },
+    "severity": {
+      "level": "LOW",
+      "score": 0.5953,
+      "description": "Low-confidence detection, requires monitoring only",
+      "escalation_required": false,
+      "reasoning": "Severity LOW assigned due to: lower model confidence (54.5%), Protocol Exploit attack type (+5% severity). Total severity score: 59.5%"
+    },
+    "mitigation": {
+      "required": true,
+      "auto_apply_recommended": false,
+      "primary_strategy": "Protocol-specific filtering and SYN cookies",
+      "immediate_actions": [
+        {
+          "name": "Enable SYN Cookies",
+          "description": "Enable kernel SYN cookies to prevent SYN flood",
+          "command": "echo 1 > /proc/sys/net/ipv4/tcp_syncookies"
+        },
+        {
+          "name": "Limit SYN Packets",
+          "description": "Limit SYN packets to prevent SYN flood",
+          "command": "iptables -A INPUT -s 192.168.1.138 -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT",
+          "followup": "iptables -A INPUT -s 192.168.1.138 -p tcp --syn -j DROP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Invalid TCP Flags",
+          "description": "Drop packets with invalid TCP flag combinations",
+          "commands": [
+            "iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP"
+          ]
+        },
+        {
+          "name": "ICMP Rate Limiting",
+          "description": "Limit ICMP packets to prevent ICMP flood",
+          "command": "iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 4 -j ACCEPT",
+          "followup": "iptables -A INPUT -p icmp -j DROP"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor SYN Backlog",
+          "description": "Check SYN queue statistics",
+          "command": "netstat -s | grep -i syn"
+        },
+        {
+          "name": "Capture Protocol Traffic",
+          "description": "Capture SYN packets for analysis",
+          "command": "tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn) != 0' -c 1000"
+        }
+      ]
+    },
+    "action_checklist": [
+      "Monitor traffic for 5 minutes",
+      "Capture traffic for analysis if attack persists",
+      "Document incident in ticketing system"
+    ],
+    "human_explanation": "This traffic has been classified as a DoS attack with 54.5% confidence.\n\nWHY THIS IS FLAGGED AS AN ATTACK:\n  1. tcprtt = 0.65 (SHAP: +1.61) - increases attack likelihood\n  2. proto = 0.36 (SHAP: -0.59) - decreases attack likelihood\n  3. sbytes = -0.05 (SHAP: -0.54) - decreases attack likelihood\n\nATTACK TYPE: Protocol Exploit\n  Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)\n\nSEVERITY: LOW\n  Low-confidence detection, requires monitoring only\n\nRECOMMENDED ACTION:\n  Protocol-specific filtering and SYN cookies",
+    "actual_label": "DoS"
+  },
+  {
+    "alert_id": "ALERT_20260130084710_23575",
+    "timestamp": "2026-01-30T08:47:10.355420",
+    "record_id": 23575,
+    "detection": {
+      "prediction": "Normal",
+      "confidence": 0.9453,
+      "probability_dos": 0.0547,
+      "probability_normal": 0.9453
+    },
+    "network_info": {
+      "source_ip": "192.168.1.115",
+      "destination_ip": "10.0.0.1",
+      "interface": "eth0"
+    },
+    "xai_explanation": {
+      "method": "SHAP TreeExplainer",
+      "top_features": [
+        "sload",
+        "proto",
+        "dur"
+      ],
+      "shap_values": {
+        "rate": -0.7075,
+        "sload": -2.7057,
+        "sbytes": -1.2002,
+        "dload": 1.1718,
+        "proto": 2.2184,
+        "dtcpb": 0.0573,
+        "stcpb": 0.1667,
+        "dmean": -0.097,
+        "tcprtt": -0.2813,
+        "dur": -1.4745
+      },
+      "feature_values": {
+        "rate": -0.5260899679851956,
+        "sload": -0.4293112470764985,
+        "sbytes": -0.0489237618771097,
+        "dload": -0.3496682757665224,
+        "proto": -0.7749864983741983,
+        "dtcpb": -0.6987034489775263,
+        "stcpb": -0.6983555077853986,
+        "dmean": -0.5377557951402568,
+        "tcprtt": -0.3643292188292704,
+        "dur": 5.878282977528111
+      },
+      "base_value": 0.0032
+    },
+    "classification": {
+      "attack_type": "None",
+      "attack_description": "Traffic classified as normal - no attack detected",
+      "classification_confidence": 0.9453,
+      "primary_indicators": [],
+      "reasoning": "Model prediction is Normal",
+      "mitigation_category": null
+    },
+    "severity": {
+      "level": null,
+      "score": 0.0,
+      "description": "No attack detected - no severity assessment needed",
+      "escalation_required": false,
+      "reasoning": "Traffic classified as normal"
+    },
+    "mitigation": {
+      "required": false,
+      "auto_apply_recommended": false,
+      "primary_strategy": null,
+      "immediate_actions": [],
+      "alternative_actions": [],
+      "monitoring_commands": []
+    },
+    "action_checklist": [
+      "No action required - traffic is normal"
+    ],
+    "human_explanation": "This traffic has been classified as NORMAL. No attack detected.",
+    "actual_label": "Normal"
+  }
+]

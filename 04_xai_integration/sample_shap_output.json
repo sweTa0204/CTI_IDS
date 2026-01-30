@@ -1,0 +1,229 @@
+{
+  "test_info": {
+    "samples_tested": 5,
+    "model_path": "D:\\Edu\\Final Project\\WorkingDirectory\\CTI_IDS\\03_model_training\\proper_training\\models\\xgboost\\xgboost_model.pkl",
+    "data_source": "Training data (X_train_scaled.csv)"
+  },
+  "explanations": [
+    {
+      "record_id": 20459,
+      "prediction": "DoS",
+      "prediction_code": 1,
+      "confidence": 0.9996,
+      "probability_dos": 0.9996,
+      "probability_normal": 0.0004,
+      "shap_values": {
+        "rate": -0.0673,
+        "sload": 2.4836,
+        "sbytes": 0.7366,
+        "dload": 0.6995,
+        "proto": 4.0827,
+        "dtcpb": 0.0256,
+        "stcpb": 0.2405,
+        "dmean": -0.0978,
+        "tcprtt": -0.1031,
+        "dur": -0.1351
+      },
+      "top_features": [
+        "proto",
+        "sload",
+        "sbytes"
+      ],
+      "base_value": 0.0032,
+      "feature_values": {
+        "rate": 1.594551427707281,
+        "sload": 1.1048479482897984,
+        "sbytes": -0.0498006531572834,
+        "dload": -0.3496682757665224,
+        "proto": 0.587847051413368,
+        "dtcpb": -0.6987034489775263,
+        "stcpb": -0.6983555077853986,
+        "dmean": -0.5377557951402568,
+        "tcprtt": -0.3643292188292704,
+        "dur": -0.2200998543376427
+      },
+      "actual_label": "DoS"
+    },
+    {
+      "record_id": 13908,
+      "prediction": "DoS",
+      "prediction_code": 1,
+      "confidence": 0.5453,
+      "probability_dos": 0.5453,
+      "probability_normal": 0.4547,
+      "shap_values": {
+        "rate": 0.089,
+        "sload": -0.4363,
+        "sbytes": -0.5435,
+        "dload": -0.1482,
+        "proto": -0.5895,
+        "dtcpb": 0.0243,
+        "stcpb": -0.0355,
+        "dmean": 0.1605,
+        "tcprtt": 1.6078,
+        "dur": 0.0498
+      },
+      "top_features": [
+        "tcprtt",
+        "proto",
+        "sbytes"
+      ],
+      "base_value": 0.0032,
+      "feature_values": {
+        "rate": -0.5259368048825722,
+        "sload": -0.429256873562162,
+        "sbytes": -0.0468554422271347,
+        "dload": -0.3486912749780556,
+        "proto": 0.3551681526691493,
+        "dtcpb": -0.5603381880212374,
+        "stcpb": 1.216498492588965,
+        "dmean": -0.3743211350595822,
+        "tcprtt": 0.6504154041127346,
+        "dur": -0.1444287460436803
+      },
+      "actual_label": "DoS"
+    },
+    {
+      "record_id": 3190,
+      "prediction": "DoS",
+      "prediction_code": 1,
+      "confidence": 0.9991,
+      "probability_dos": 0.9991,
+      "probability_normal": 0.0009,
+      "shap_values": {
+        "rate": -0.0459,
+        "sload": 2.1385,
+        "sbytes": 0.5477,
+        "dload": 0.8298,
+        "proto": 3.2158,
+        "dtcpb": 0.0295,
+        "stcpb": 0.2454,
+        "dmean": -0.0561,
+        "tcprtt": -0.113,
+        "dur": 0.1924
+      },
+      "top_features": [
+        "proto",
+        "sload",
+        "dload"
+      ],
+      "base_value": 0.0032,
+      "feature_values": {
+        "rate": 0.2691501879544998,
+        "sload": 0.145998290115305,
+        "sbytes": -0.0498006531572834,
+        "dload": -0.3496682757665224,
+        "proto": -0.2431490155302699,
+        "dtcpb": -0.6987034489775263,
+        "stcpb": -0.6983555077853986,
+        "dmean": -0.5377557951402568,
+        "tcprtt": -0.3643292188292704,
+        "dur": -0.2200992445529596
+      },
+      "actual_label": "DoS"
+    },
+    {
+      "record_id": 13417,
+      "prediction": "Normal",
+      "prediction_code": 0,
+      "confidence": 0.8332,
+      "probability_dos": 0.1668,
+      "probability_normal": 0.8332,
+      "shap_values": {
+        "rate": -0.1036,
+        "sload": 1.2186,
+        "sbytes": -2.2909,
+        "dload": 0.2824,
+        "proto": -0.3477,
+        "dtcpb": 0.0295,
+        "stcpb": 0.2254,
+        "dmean": -0.2461,
+        "tcprtt": -0.1496,
+        "dur": -0.2301
+      },
+      "top_features": [
+        "sbytes",
+        "sload",
+        "proto"
+      ],
+      "base_value": 0.0032,
+      "feature_values": {
+        "rate": 1.594551427707281,
+        "sload": 0.3684513636824061,
+        "sbytes": -0.0502581616512871,
+        "dload": -0.3496682757665224,
+        "proto": 0.5546072087356225,
+        "dtcpb": -0.6987034489775263,
+        "stcpb": -0.6983555077853986,
+        "dmean": -0.5377557951402568,
+        "tcprtt": -0.3643292188292704,
+        "dur": -0.2200998543376427
+      },
+      "actual_label": "Normal"
+    },
+    {
+      "record_id": 8457,
+      "prediction": "Normal",
+      "prediction_code": 0,
+      "confidence": 0.9997,
+      "probability_dos": 0.0003,
+      "probability_normal": 0.9997,
+      "shap_values": {
+        "rate": -0.1034,
+        "sload": -1.3462,
+        "sbytes": -0.6355,
+        "dload": -3.6993,
+        "proto": -0.5361,
+        "dtcpb": -0.0166,
+        "stcpb": -0.2527,
+        "dmean": -0.0373,
+        "tcprtt": -1.3943,
+        "dur": -0.1619
+      },
+      "top_features": [
+        "dload",
+        "tcprtt",
+        "sload"
+      ],
+      "base_value": 0.0032,
+      "feature_values": {
+        "rate": -0.5063193669248794,
+        "sload": -0.4251103832730148,
+        "sbytes": -0.0335305073392775,
+        "dload": 3.072122287324313,
+        "proto": 0.3551681526691493,
+        "dtcpb": 1.6873028918280069,
+        "stcpb": 0.0955108214071078,
+        "dmean": 2.393172442306509,
+        "tcprtt": -0.3542691469294977,
+        "dur": -0.2153518268810522
+      },
+      "actual_label": "Normal"
+    }
+  ],
+  "summary": {
+    "total_records": 5,
+    "dos_detections": 3,
+    "normal_detections": 2,
+    "dos_percentage": 60.0,
+    "average_contributions_dos": {
+      "rate": -0.0081,
+      "sload": 1.3953,
+      "sbytes": 0.2469,
+      "dload": 0.4604,
+      "proto": 2.2363,
+      "dtcpb": 0.0265,
+      "stcpb": 0.1501,
+      "dmean": 0.0022,
+      "tcprtt": 0.4639,
+      "dur": 0.0357
+    },
+    "top_features_frequency": {
+      "proto": 3,
+      "sload": 2,
+      "sbytes": 2,
+      "dload": 1,
+      "tcprtt": 1
+    }
+  }
+}

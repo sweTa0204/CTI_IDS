@@ -1,0 +1,32 @@
+{
+    "model_name": "MLP (Multi-Layer Perceptron)",
+    "training_date": "2026-01-28 12:26:12",
+    "best_parameters": {
+        "hidden_layer_sizes": [
+            150,
+            75,
+            25
+        ],
+        "activation": "relu",
+        "alpha": 0.01,
+        "learning_rate_init": 0.01,
+        "max_iter": 500,
+        "random_state": 42,
+        "early_stopping": true
+    },
+    "performance_metrics": {
+        "accuracy": 0.9211491442542787,
+        "precision": 0.9175757575757576,
+        "recall": 0.9254278728606357,
+        "f1_score": 0.9214850882531954,
+        "roc_auc": 0.9746481967467913,
+        "cv_f1_score": 0.9164741997310824
+    },
+    "training_time_seconds": 1.474412,
+    "network_architecture": {
+        "input_layer": 10,
+        "hidden_layers": "(150, 75, 25)",
+        "output_layer": 1,
+        "iterations_to_convergence": 24
+    }
+}

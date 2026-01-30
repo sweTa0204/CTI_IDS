@@ -1,0 +1,48 @@
+{
+  "test_info": {
+    "date": "2026-01-30 09:50:47",
+    "total_samples": 41089,
+    "dos_samples": 4089,
+    "normal_samples": 37000,
+    "threshold_used": 0.8517,
+    "processing_time_minutes": 1.62,
+    "samples_per_second": 422.07
+  },
+  "model_performance": {
+    "threshold_used": 0.8517,
+    "true_positives": 3535,
+    "true_negatives": 36791,
+    "false_positives": 209,
+    "false_negatives": 554,
+    "accuracy": 98.1431,
+    "precision": 94.4177,
+    "recall": 86.4515,
+    "f1_score": 90.2592
+  },
+  "attack_type_distribution": {
+    "Protocol Exploit": 660,
+    "Amplification": 36,
+    "Volumetric Flood": 3043,
+    "Slowloris": 5
+  },
+  "severity_distribution": {
+    "CRITICAL": 3743,
+    "HIGH": 1
+  },
+  "escalation_stats": {
+    "escalation_required": 3744,
+    "percentage_of_dos": 100.0
+  },
+  "pipeline_components": [
+    "XGBoost Classifier (threshold optimized)",
+    "SHAP TreeExplainer",
+    "Attack Classifier (4 types)",
+    "Severity Calculator (4 levels)",
+    "Mitigation Generator (iptables/tc)"
+  ],
+  "threshold_explanation": {
+    "default_threshold": 0.5,
+    "optimized_threshold": 0.8517,
+    "reason": "Threshold optimized to maximize F1 score on imbalanced data"
+  }
+}

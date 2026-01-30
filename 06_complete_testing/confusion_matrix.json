@@ -1,0 +1,11 @@
+{
+  "threshold_used": 0.8517,
+  "true_positives": 3535,
+  "true_negatives": 36791,
+  "false_positives": 209,
+  "false_negatives": 554,
+  "accuracy": 98.1431,
+  "precision": 94.4177,
+  "recall": 86.4515,
+  "f1_score": 90.2592
+}

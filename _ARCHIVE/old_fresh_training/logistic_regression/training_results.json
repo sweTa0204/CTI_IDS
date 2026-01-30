@@ -1,0 +1,32 @@
+{
+    "model_name": "Logistic Regression",
+    "training_date": "2026-01-28 12:27:24",
+    "best_parameters": {
+        "C": 100.0,
+        "max_iter": 1000,
+        "penalty": "l2",
+        "solver": "liblinear",
+        "random_state": 42
+    },
+    "performance_metrics": {
+        "accuracy": 0.7817848410757946,
+        "precision": 0.7708578143360753,
+        "recall": 0.8019559902200489,
+        "f1_score": 0.7860994607549431,
+        "roc_auc": 0.8530399447636013,
+        "cv_f1_score": 0.781676606203073
+    },
+    "training_time_seconds": 0.017829,
+    "feature_coefficients": {
+        "rate": 0.7267916693194404,
+        "sload": -0.1675259326011908,
+        "sbytes": 1.9060967242102853,
+        "dload": -10.97183658449863,
+        "proto": -0.30526696563255806,
+        "dtcpb": -0.2990636041923945,
+        "stcpb": -0.21104300363612996,
+        "dmean": 0.7623066436656227,
+        "tcprtt": -0.5463495536596152,
+        "dur": 0.11683444550074877
+    }
+}

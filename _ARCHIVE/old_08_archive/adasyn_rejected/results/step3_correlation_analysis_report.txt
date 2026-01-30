@@ -1,0 +1,15 @@
+STEP 2.3: CORRELATION ANALYSIS REPORT
+==================================================
+Generated: 2025-09-01 15:52:25
+
+INPUT:
+- Dataset: encoded_dataset.csv
+- Features: 42
+- Records: 8178
+
+CORRELATION ANALYSIS:
+- Threshold: 0.9
+- High correlation pairs found: 10
+- Features removed: 8
+
+HIGH CORRELATION PAIRS:

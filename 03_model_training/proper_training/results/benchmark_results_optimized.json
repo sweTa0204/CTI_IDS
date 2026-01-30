@@ -1,0 +1,107 @@
+{
+  "XGBoost": {
+    "optimal_threshold": 0.8517398834228516,
+    "accuracy": 0.9814305531894181,
+    "precision": 0.9441773504273504,
+    "recall": 0.8645145512350207,
+    "f1_score": 0.902591599642538,
+    "confusion_matrix": [
+      [
+        36791,
+        209
+      ],
+      [
+        554,
+        3535
+      ]
+    ],
+    "true_negatives": 36791,
+    "false_positives": 209,
+    "false_negatives": 554,
+    "true_positives": 3535
+  },
+  "RandomForest": {
+    "optimal_threshold": 0.6864990431765802,
+    "accuracy": 0.979288860765655,
+    "precision": 0.8985721319547021,
+    "recall": 0.892638786989484,
+    "f1_score": 0.8955956324377377,
+    "confusion_matrix": [
+      [
+        36588,
+        412
+      ],
+      [
+        439,
+        3650
+      ]
+    ],
+    "true_negatives": 36588,
+    "false_positives": 412,
+    "false_negatives": 439,
+    "true_positives": 3650
+  },
+  "MLP": {
+    "optimal_threshold": 0.8448411000946285,
+    "accuracy": 0.9714278760738884,
+    "precision": 0.8842604798312681,
+    "recall": 0.8202494497432135,
+    "f1_score": 0.8510530322253235,
+    "confusion_matrix": [
+      [
+        36561,
+        439
+      ],
+      [
+        735,
+        3354
+      ]
+    ],
+    "true_negatives": 36561,
+    "false_positives": 439,
+    "false_negatives": 735,
+    "true_positives": 3354
+  },
+  "SVM": {
+    "optimal_threshold": 0.9300131185865901,
+    "accuracy": 0.9585533841174037,
+    "precision": 0.8247142079477409,
+    "recall": 0.7410124724871606,
+    "f1_score": 0.780626046631457,
+    "confusion_matrix": [
+      [
+        36356,
+        644
+      ],
+      [
+        1059,
+        3030
+      ]
+    ],
+    "true_negatives": 36356,
+    "false_positives": 644,
+    "false_negatives": 1059,
+    "true_positives": 3030
+  },
+  "LogisticRegression": {
+    "optimal_threshold": 0.7468301857411537,
+    "accuracy": 0.8841539098055441,
+    "precision": 0.44475547505351554,
+    "recall": 0.6605527023722182,
+    "f1_score": 0.5315882700255855,
+    "confusion_matrix": [
+      [
+        33628,
+        3372
+      ],
+      [
+        1388,
+        2701
+      ]
+    ],
+    "true_negatives": 33628,
+    "false_positives": 3372,
+    "false_negatives": 1388,
+    "true_positives": 2701
+  }
+}

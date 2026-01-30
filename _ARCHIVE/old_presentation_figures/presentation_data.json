@@ -1,0 +1,71 @@
+{
+  "dataset": {
+    "final_samples": 8178,
+    "final_features": 10,
+    "class_balance": {
+      "0": 4089,
+      "1": 4089
+    },
+    "original_features": 44,
+    "feature_reduction_percent": 75.6,
+    "missing_values": 0,
+    "data_quality": "Perfect (No missing values, No duplicates)"
+  },
+  "models": {
+    "XGBoost": {
+      "accuracy": 95.54,
+      "precision": 96.27,
+      "recall": 94.74,
+      "f1_score": 95.5,
+      "roc_auc": 99.13,
+      "training_time": 0.2361
+    },
+    "Random Forest": {
+      "accuracy": 95.29,
+      "precision": 96.84,
+      "recall": 93.64,
+      "f1_score": 95.21,
+      "roc_auc": 99.01,
+      "training_time": 0.3463
+    },
+    "Neural Network": {
+      "accuracy": 92.48,
+      "precision": 96.27,
+      "recall": 88.39,
+      "f1_score": 92.16,
+      "roc_auc": 97.35,
+      "training_time": 1.569
+    },
+    "SVM": {
+      "accuracy": 90.04,
+      "precision": 94.44,
+      "recall": 85.09,
+      "f1_score": 89.52,
+      "roc_auc": 95.34,
+      "training_time": 1.5238
+    },
+    "Logistic Regression": {
+      "accuracy": 78.18,
+      "precision": 77.09,
+      "recall": 80.2,
+      "f1_score": 78.61,
+      "roc_auc": 85.3,
+      "training_time": 0.0096
+    }
+  },
+  "xai": {
+    "random_forest_shap_accuracy": 100.0,
+    "xgboost_shap_accuracy": 90.0,
+    "selected_combination": "Random Forest + SHAP",
+    "selection_reason": "Perfect explanation accuracy (100% vs 90%)",
+    "samples_analyzed": 10
+  },
+  "summary": {
+    "best_model": "XGBoost",
+    "best_accuracy": 95.54,
+    "performance_range": "78.18% - 95.54%",
+    "improvement_over_baseline": 17.36,
+    "total_models_tested": 5,
+    "feature_efficiency": "78% reduction, 75.6% improvement"
+  }
+}

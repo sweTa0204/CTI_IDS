@@ -1,0 +1,19 @@
+{
+    "model_name": "SVM",
+    "training_date": "2026-01-28 12:24:55",
+    "best_parameters": {
+        "C": 10.0,
+        "gamma": "scale",
+        "kernel": "rbf",
+        "random_state": 42
+    },
+    "performance_metrics": {
+        "accuracy": 0.8960880195599022,
+        "precision": 0.9354838709677419,
+        "recall": 0.8508557457212714,
+        "f1_score": 0.8911651728553137,
+        "roc_auc": 0.9530034791757582,
+        "cv_f1_score": 0.8910203431138985
+    },
+    "training_time_seconds": 2.161095
+}

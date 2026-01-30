@@ -1,0 +1,105 @@
+{
+  "test_info": {
+    "samples_classified": 5,
+    "dos_detections": 3,
+    "attack_types": [
+      "Volumetric Flood",
+      "Protocol Exploit",
+      "Slowloris",
+      "Amplification",
+      "Generic DoS"
+    ]
+  },
+  "classifications": [
+    {
+      "attack_type": "Protocol Exploit",
+      "attack_description": "Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)",
+      "confidence": 1.0,
+      "primary_indicators": [
+        "proto"
+      ],
+      "reasoning": "Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: 4.08)",
+      "mitigation_category": "protocol_filtering",
+      "all_scores": {
+        "Volumetric Flood": 0.8,
+        "Protocol Exploit": 1.0,
+        "Slowloris": 0.4,
+        "Amplification": 0.25
+      },
+      "record_id": 20459,
+      "original_prediction": "DoS",
+      "original_confidence": 0.9996
+    },
+    {
+      "attack_type": "Protocol Exploit",
+      "attack_description": "Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)",
+      "confidence": 0.4,
+      "primary_indicators": [
+        "proto"
+      ],
+      "reasoning": "Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: -0.59)",
+      "mitigation_category": "protocol_filtering",
+      "all_scores": {
+        "Volumetric Flood": 0.25,
+        "Protocol Exploit": 0.4,
+        "Slowloris": 0.2,
+        "Amplification": 0.25
+      },
+      "record_id": 13908,
+      "original_prediction": "DoS",
+      "original_confidence": 0.5453
+    },
+    {
+      "attack_type": "Protocol Exploit",
+      "attack_description": "Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)",
+      "confidence": 1.0,
+      "primary_indicators": [
+        "proto"
+      ],
+      "reasoning": "Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: 3.22)",
+      "mitigation_category": "protocol_filtering",
+      "all_scores": {
+        "Volumetric Flood": 0.55,
+        "Protocol Exploit": 1.0,
+        "Slowloris": 0.4,
+        "Amplification": 0.4
+      },
+      "record_id": 3190,
+      "original_prediction": "DoS",
+      "original_confidence": 0.9991
+    },
+    {
+      "attack_type": "None",
+      "attack_description": "Traffic classified as normal - no attack detected",
+      "confidence": 0.8332,
+      "primary_indicators": [],
+      "reasoning": "Model prediction is Normal",
+      "mitigation_category": null,
+      "record_id": 13417,
+      "original_prediction": "Normal",
+      "original_confidence": 0.8332
+    },
+    {
+      "attack_type": "None",
+      "attack_description": "Traffic classified as normal - no attack detected",
+      "confidence": 0.9997,
+      "primary_indicators": [],
+      "reasoning": "Model prediction is Normal",
+      "mitigation_category": null,
+      "record_id": 8457,
+      "original_prediction": "Normal",
+      "original_confidence": 0.9997
+    }
+  ],
+  "statistics": {
+    "total_classifications": 3,
+    "attack_type_counts": {
+      "Protocol Exploit": 3
+    },
+    "attack_type_percentages": {
+      "Protocol Exploit": 100.0
+    },
+    "most_common_type": "Protocol Exploit",
+    "most_common_count": 3
+  }
+}

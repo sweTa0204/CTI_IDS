@@ -1,0 +1,47 @@
+
+DoS Detection Dataset Creation Report
+====================================
+
+Date: 2025-08-31 21:16:08
+Dataset: UNSW-NB15 Training Set
+Purpose: Binary DoS Detection (DoS vs Normal)
+
+DATASET SUMMARY:
+- Total Records: 8,178
+- DoS Attacks: 4,089
+- Normal Traffic: 4,089
+- Total Features: 45
+- Balance Ratio: 50/50 (perfectly balanced)
+
+TARGET DISTRIBUTION:
+- Normal: 4,089 (50.00%)
+- DoS: 4,089 (50.00%)
+
+LABEL DISTRIBUTION:
+- Normal (0): 4,089 (50.00%)
+- Attack (1): 4,089 (50.00%)
+
+FEATURE SUMMARY:
+- Total Features: 42
+- Numeric Features: 39
+- Categorical Features: 3
+- Features with Missing Values: 0
+
+DATA QUALITY:
+- Missing Values: 0 total
+- Duplicate Records: 0
+- Complete Records: 8,178
+
+NEXT STEPS:
+1. Step 2.1: Data Cleanup (remove missing values, handle duplicates)
+2. Step 2.2: Categorical Encoding (encode non-numeric features)
+3. Step 2.3: Correlation Analysis (remove highly correlated features)
+4. Step 2.4: Variance Analysis (remove low-variance features)
+5. Step 2.5: Statistical Testing (ANOVA F-tests, mutual information)
+6. Step 2.6: Final Feature Selection
+
+BALANCED DATASET BENEFITS:
+- Equal representation of both classes
+- Prevents model bias toward majority class
+- Enables accurate performance metrics
+- Suitable for binary classification

@@ -1,0 +1,297 @@
+{
+  "description": "Feature-to-Action Mapping for DoS Mitigation",
+  "version": "1.0",
+  "date": "2026-01-29",
+
+  "attack_type_mitigations": {
+    "Volumetric Flood": {
+      "description": "High-volume traffic flood attempting to overwhelm network resources",
+      "primary_strategy": "Rate limiting and bandwidth throttling",
+      "immediate_actions": [
+        {
+          "name": "Rate Limiting (iptables)",
+          "command": "iptables -A INPUT -s {source_ip} -m limit --limit 100/s --limit-burst 200 -j ACCEPT",
+          "followup": "iptables -A INPUT -s {source_ip} -j DROP",
+          "description": "Limit incoming packets to 100/second with burst of 200"
+        },
+        {
+          "name": "Connection Limiting",
+          "command": "iptables -A INPUT -s {source_ip} -p tcp --syn -m connlimit --connlimit-above 20 -j DROP",
+          "description": "Limit maximum concurrent connections from source IP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Bandwidth Throttling (tc)",
+          "commands": [
+            "tc qdisc add dev {interface} root handle 1: htb default 12",
+            "tc class add dev {interface} parent 1: classid 1:1 htb rate 1mbit ceil 2mbit",
+            "tc filter add dev {interface} protocol ip parent 1:0 prio 1 u32 match ip src {source_ip} flowid 1:1"
+          ],
+          "description": "Limit bandwidth from source IP to 1 Mbit"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Capture Traffic",
+          "command": "tcpdump -i {interface} src {source_ip} -w /tmp/dos_capture_{timestamp}.pcap -c 10000",
+          "description": "Capture packets for forensic analysis"
+        },
+        {
+          "name": "Monitor Connections",
+          "command": "watch -n 1 'netstat -an | grep {source_ip} | wc -l'",
+          "description": "Monitor connection count from source IP"
+        }
+      ]
+    },
+
+    "Protocol Exploit": {
+      "description": "Attack exploiting protocol weaknesses (e.g., SYN flood, ICMP flood)",
+      "primary_strategy": "Protocol-specific filtering and SYN cookies",
+      "immediate_actions": [
+        {
+          "name": "Enable SYN Cookies",
+          "command": "echo 1 > /proc/sys/net/ipv4/tcp_syncookies",
+          "description": "Enable kernel SYN cookies to prevent SYN flood"
+        },
+        {
+          "name": "Limit SYN Packets",
+          "command": "iptables -A INPUT -s {source_ip} -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT",
+          "followup": "iptables -A INPUT -s {source_ip} -p tcp --syn -j DROP",
+          "description": "Limit SYN packets to prevent SYN flood"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Invalid TCP Flags",
+          "commands": [
+            "iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP"
+          ],
+          "description": "Drop packets with invalid TCP flag combinations"
+        },
+        {
+          "name": "ICMP Rate Limiting",
+          "command": "iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 4 -j ACCEPT",
+          "followup": "iptables -A INPUT -p icmp -j DROP",
+          "description": "Limit ICMP packets to prevent ICMP flood"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor SYN Backlog",
+          "command": "netstat -s | grep -i syn",
+          "description": "Check SYN queue statistics"
+        },
+        {
+          "name": "Capture Protocol Traffic",
+          "command": "tcpdump -i {interface} 'tcp[tcpflags] & (tcp-syn) != 0' -c 1000",
+          "description": "Capture SYN packets for analysis"
+        }
+      ]
+    },
+
+    "Slowloris": {
+      "description": "Slow, persistent attack keeping connections open to exhaust resources",
+      "primary_strategy": "Reduce timeouts and limit connections per IP",
+      "immediate_actions": [
+        {
+          "name": "Reduce Keep-Alive Timeout",
+          "command": "echo 10 > /proc/sys/net/ipv4/tcp_keepalive_time",
+          "description": "Reduce TCP keep-alive timeout to 10 seconds"
+        },
+        {
+          "name": "Limit Connections Per IP",
+          "command": "iptables -A INPUT -s {source_ip} -p tcp --dport 80 -m connlimit --connlimit-above 10 -j DROP",
+          "description": "Limit HTTP connections per IP to 10"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Apache mod_reqtimeout",
+          "config": "RequestReadTimeout header=20-40,MinRate=500 body=20,MinRate=500",
+          "description": "Configure Apache request timeout module"
+        },
+        {
+          "name": "Nginx Client Timeouts",
+          "config": "client_body_timeout 10s; client_header_timeout 10s; send_timeout 10s;",
+          "description": "Configure Nginx timeout settings"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Check Open Connections",
+          "command": "netstat -an | grep ESTABLISHED | grep ':80' | wc -l",
+          "description": "Count established HTTP connections"
+        },
+        {
+          "name": "Monitor Connection Duration",
+          "command": "ss -tn state established '( dport = :80 )' | awk '{print $1}' | sort | uniq -c | sort -rn",
+          "description": "Check long-lived connections"
+        }
+      ]
+    },
+
+    "Amplification": {
+      "description": "Attack using amplification techniques (response larger than request)",
+      "primary_strategy": "Block amplification protocols from untrusted sources",
+      "immediate_actions": [
+        {
+          "name": "Block DNS Amplification",
+          "command": "iptables -A INPUT -p udp --sport 53 -m length --length 512: -j DROP",
+          "description": "Drop large DNS responses (potential amplification)"
+        },
+        {
+          "name": "Block NTP Amplification",
+          "command": "iptables -A INPUT -p udp --sport 123 -j DROP",
+          "description": "Block NTP responses from external sources"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Common Amplification Ports",
+          "commands": [
+            "iptables -A INPUT -p udp --sport 19 -j DROP",
+            "iptables -A INPUT -p udp --sport 111 -j DROP",
+            "iptables -A INPUT -p udp --sport 137:139 -j DROP",
+            "iptables -A INPUT -p udp --sport 1900 -j DROP"
+          ],
+          "description": "Block CHARGEN, RPC, NetBIOS, SSDP amplification"
+        },
+        {
+          "name": "Enable Source Validation",
+          "command": "echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter",
+          "description": "Enable reverse path filtering to prevent spoofing"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor UDP Traffic",
+          "command": "tcpdump -i {interface} 'udp and (port 53 or port 123 or port 19)' -c 100",
+          "description": "Capture potential amplification traffic"
+        },
+        {
+          "name": "Check Response Ratios",
+          "command": "iptables -L -v -n | grep -E '(53|123|19)'",
+          "description": "Check packet counts on amplification ports"
+        }
+      ]
+    },
+
+    "Generic DoS": {
+      "description": "DoS attack that doesn't fit specific patterns",
+      "primary_strategy": "General rate limiting and monitoring",
+      "immediate_actions": [
+        {
+          "name": "General Rate Limiting",
+          "command": "iptables -A INPUT -s {source_ip} -m limit --limit 50/s -j ACCEPT",
+          "followup": "iptables -A INPUT -s {source_ip} -j DROP",
+          "description": "Apply general rate limiting to source IP"
+        },
+        {
+          "name": "Temporary Block",
+          "command": "iptables -A INPUT -s {source_ip} -j DROP",
+          "description": "Temporarily block traffic from source IP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Enable Connection Tracking",
+          "command": "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT",
+          "description": "Only allow established connections"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Full Traffic Capture",
+          "command": "tcpdump -i {interface} src {source_ip} -w /tmp/generic_dos_{timestamp}.pcap",
+          "description": "Capture all traffic for analysis"
+        },
+        {
+          "name": "Connection Statistics",
+          "command": "ss -s",
+          "description": "Show socket statistics"
+        }
+      ]
+    }
+  },
+
+  "feature_specific_mitigations": {
+    "rate": {
+      "description": "High packet rate mitigation",
+      "threshold_high": 500,
+      "unit": "packets/second",
+      "action": {
+        "command": "iptables -m limit --limit 100/s",
+        "description": "Limit packet rate"
+      }
+    },
+    "sload": {
+      "description": "High source bandwidth mitigation",
+      "threshold_high": 100000,
+      "unit": "bytes/second",
+      "action": {
+        "command": "tc rate limiting",
+        "description": "Apply bandwidth throttling"
+      }
+    },
+    "sbytes": {
+      "description": "High bytes transferred mitigation",
+      "threshold_high": 1000000,
+      "unit": "bytes",
+      "action": {
+        "command": "iptables -m connlimit",
+        "description": "Limit connections"
+      }
+    },
+    "dload": {
+      "description": "High destination load (amplification indicator)",
+      "threshold_high": 200000,
+      "unit": "bytes/second",
+      "action": {
+        "command": "Block amplification protocols",
+        "description": "Filter amplification traffic"
+      }
+    },
+    "dur": {
+      "description": "Long duration connection (Slowloris indicator)",
+      "threshold_high": 60,
+      "unit": "seconds",
+      "action": {
+        "command": "Reduce timeout settings",
+        "description": "Lower connection timeouts"
+      }
+    },
+    "proto": {
+      "description": "Protocol-based filtering",
+      "action": {
+        "command": "iptables -p {protocol}",
+        "description": "Apply protocol-specific rules"
+      }
+    }
+  },
+
+  "severity_based_actions": {
+    "LOW": {
+      "auto_apply": false,
+      "notification": "Log only",
+      "actions": ["Monitor", "Log"]
+    },
+    "MEDIUM": {
+      "auto_apply": false,
+      "notification": "Email alert",
+      "actions": ["Rate limiting", "Enhanced logging"]
+    },
+    "HIGH": {
+      "auto_apply": true,
+      "notification": "SMS + Email",
+      "actions": ["Immediate throttling", "Prepare blocking"]
+    },
+    "CRITICAL": {
+      "auto_apply": true,
+      "notification": "Phone call + SMS + Email",
+      "actions": ["Auto-block", "SOC escalation", "Incident response"]
+    }
+  }
+}

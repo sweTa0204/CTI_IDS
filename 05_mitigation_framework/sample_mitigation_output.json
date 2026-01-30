@@ -1,0 +1,209 @@
+{
+  "test_info": {
+    "records_processed": 5,
+    "mitigations_generated": 3
+  },
+  "mitigations": [
+    {
+      "attack_type": "Protocol Exploit",
+      "severity": "CRITICAL",
+      "mitigations_required": true,
+      "auto_apply_recommended": true,
+      "primary_strategy": "Protocol-specific filtering and SYN cookies",
+      "immediate_actions": [
+        {
+          "name": "Enable SYN Cookies",
+          "description": "Enable kernel SYN cookies to prevent SYN flood",
+          "command": "echo 1 > /proc/sys/net/ipv4/tcp_syncookies"
+        },
+        {
+          "name": "Limit SYN Packets",
+          "description": "Limit SYN packets to prevent SYN flood",
+          "command": "iptables -A INPUT -s 192.168.1.59 -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT",
+          "followup": "iptables -A INPUT -s 192.168.1.59 -p tcp --syn -j DROP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Invalid TCP Flags",
+          "description": "Drop packets with invalid TCP flag combinations",
+          "commands": [
+            "iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP"
+          ]
+        },
+        {
+          "name": "ICMP Rate Limiting",
+          "description": "Limit ICMP packets to prevent ICMP flood",
+          "command": "iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 4 -j ACCEPT",
+          "followup": "iptables -A INPUT -p icmp -j DROP"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor SYN Backlog",
+          "description": "Check SYN queue statistics",
+          "command": "netstat -s | grep -i syn"
+        },
+        {
+          "name": "Capture Protocol Traffic",
+          "description": "Capture SYN packets for analysis",
+          "command": "tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn) != 0' -c 1000"
+        }
+      ],
+      "human_explanation": "A Protocol Exploit attack has been detected with CRITICAL severity.\n\nWhy: Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: 4.08)\n\nRecommended immediate actions:\n  1. Enable SYN Cookies: Enable kernel SYN cookies to prevent SYN flood\n  2. Limit SYN Packets: Limit SYN packets to prevent SYN flood\n\n[CRITICAL] Immediate action required. Auto-blocking recommended. Escalate to SOC immediately.",
+      "notification_level": "Phone call + SMS + Email",
+      "escalation_actions": [
+        "Auto-block",
+        "SOC escalation",
+        "Incident response"
+      ],
+      "record_id": 20459
+    },
+    {
+      "attack_type": "Protocol Exploit",
+      "severity": "LOW",
+      "mitigations_required": true,
+      "auto_apply_recommended": false,
+      "primary_strategy": "Protocol-specific filtering and SYN cookies",
+      "immediate_actions": [
+        {
+          "name": "Enable SYN Cookies",
+          "description": "Enable kernel SYN cookies to prevent SYN flood",
+          "command": "echo 1 > /proc/sys/net/ipv4/tcp_syncookies"
+        },
+        {
+          "name": "Limit SYN Packets",
+          "description": "Limit SYN packets to prevent SYN flood",
+          "command": "iptables -A INPUT -s 192.168.1.138 -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT",
+          "followup": "iptables -A INPUT -s 192.168.1.138 -p tcp --syn -j DROP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Invalid TCP Flags",
+          "description": "Drop packets with invalid TCP flag combinations",
+          "commands": [
+            "iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP"
+          ]
+        },
+        {
+          "name": "ICMP Rate Limiting",
+          "description": "Limit ICMP packets to prevent ICMP flood",
+          "command": "iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 4 -j ACCEPT",
+          "followup": "iptables -A INPUT -p icmp -j DROP"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor SYN Backlog",
+          "description": "Check SYN queue statistics",
+          "command": "netstat -s | grep -i syn"
+        },
+        {
+          "name": "Capture Protocol Traffic",
+          "description": "Capture SYN packets for analysis",
+          "command": "tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn) != 0' -c 1000"
+        }
+      ],
+      "human_explanation": "A Protocol Exploit attack has been detected with LOW severity.\n\nWhy: Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: -0.59)\n\nRecommended immediate actions:\n  1. Enable SYN Cookies: Enable kernel SYN cookies to prevent SYN flood\n  2. Limit SYN Packets: Limit SYN packets to prevent SYN flood\n\n[LOW] Monitor traffic patterns. No immediate action required.",
+      "notification_level": "Log only",
+      "escalation_actions": [
+        "Monitor",
+        "Log"
+      ],
+      "record_id": 13908
+    },
+    {
+      "attack_type": "Protocol Exploit",
+      "severity": "CRITICAL",
+      "mitigations_required": true,
+      "auto_apply_recommended": true,
+      "primary_strategy": "Protocol-specific filtering and SYN cookies",
+      "immediate_actions": [
+        {
+          "name": "Enable SYN Cookies",
+          "description": "Enable kernel SYN cookies to prevent SYN flood",
+          "command": "echo 1 > /proc/sys/net/ipv4/tcp_syncookies"
+        },
+        {
+          "name": "Limit SYN Packets",
+          "description": "Limit SYN packets to prevent SYN flood",
+          "command": "iptables -A INPUT -s 192.168.1.130 -p tcp --syn -m limit --limit 1/s --limit-burst 3 -j ACCEPT",
+          "followup": "iptables -A INPUT -s 192.168.1.130 -p tcp --syn -j DROP"
+        }
+      ],
+      "alternative_actions": [
+        {
+          "name": "Block Invalid TCP Flags",
+          "description": "Drop packets with invalid TCP flag combinations",
+          "commands": [
+            "iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP",
+            "iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP"
+          ]
+        },
+        {
+          "name": "ICMP Rate Limiting",
+          "description": "Limit ICMP packets to prevent ICMP flood",
+          "command": "iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 4 -j ACCEPT",
+          "followup": "iptables -A INPUT -p icmp -j DROP"
+        }
+      ],
+      "monitoring_commands": [
+        {
+          "name": "Monitor SYN Backlog",
+          "description": "Check SYN queue statistics",
+          "command": "netstat -s | grep -i syn"
+        },
+        {
+          "name": "Capture Protocol Traffic",
+          "description": "Capture SYN packets for analysis",
+          "command": "tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn) != 0' -c 1000"
+        }
+      ],
+      "human_explanation": "A Protocol Exploit attack has been detected with CRITICAL severity.\n\nWhy: Classified as Protocol Exploit due to: unusual protocol behavior (SHAP: 3.22)\n\nRecommended immediate actions:\n  1. Enable SYN Cookies: Enable kernel SYN cookies to prevent SYN flood\n  2. Limit SYN Packets: Limit SYN packets to prevent SYN flood\n\n[CRITICAL] Immediate action required. Auto-blocking recommended. Escalate to SOC immediately.",
+      "notification_level": "Phone call + SMS + Email",
+      "escalation_actions": [
+        "Auto-block",
+        "SOC escalation",
+        "Incident response"
+      ],
+      "record_id": 3190
+    },
+    {
+      "attack_type": "None",
+      "severity": null,
+      "mitigations_required": false,
+      "immediate_actions": [],
+      "alternative_actions": [],
+      "monitoring_commands": [],
+      "human_explanation": "No attack detected - no mitigation required",
+      "record_id": 13417
+    },
+    {
+      "attack_type": "None",
+      "severity": null,
+      "mitigations_required": false,
+      "immediate_actions": [],
+      "alternative_actions": [],
+      "monitoring_commands": [],
+      "human_explanation": "No attack detected - no mitigation required",
+      "record_id": 8457
+    }
+  ],
+  "statistics": {
+    "total_mitigations": 3,
+    "attack_type_counts": {
+      "Protocol Exploit": 3
+    },
+    "auto_apply_recommended": 2,
+    "auto_apply_percentage": 66.67,
+    "strategy_counts": {
+      "Protocol-specific filtering and SYN cookies": 3
+    }
+  }
+}

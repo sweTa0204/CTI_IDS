@@ -1,0 +1,16 @@
+{
+  "threshold_used": 0.8517,
+  "total_dos_predictions": 3744,
+  "attack_types": {
+    "Protocol Exploit": 660,
+    "Amplification": 36,
+    "Volumetric Flood": 3043,
+    "Slowloris": 5
+  },
+  "percentages": {
+    "Protocol Exploit": 17.63,
+    "Amplification": 0.96,
+    "Volumetric Flood": 81.28,
+    "Slowloris": 0.13
+  }
+}

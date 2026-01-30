@@ -1,0 +1,144 @@
+{
+  "test_info": {
+    "records_assessed": 5,
+    "dos_detections": 3,
+    "severity_levels": [
+      "LOW",
+      "MEDIUM",
+      "HIGH",
+      "CRITICAL"
+    ]
+  },
+  "severity_results": [
+    {
+      "severity": "CRITICAL",
+      "severity_score": 1.0,
+      "severity_level_info": {
+        "level": 4,
+        "color": "red",
+        "description": "Very high confidence with severe indicators, auto-block recommended",
+        "actions": [
+          "Apply auto-blocking",
+          "Escalate to SOC immediately",
+          "Activate incident response"
+        ],
+        "escalation_required": true
+      },
+      "description": "Very high confidence with severe indicators, auto-block recommended",
+      "recommended_actions": [
+        "Apply auto-blocking",
+        "Escalate to SOC immediately",
+        "Activate incident response"
+      ],
+      "escalation_required": true,
+      "reasoning": "Severity CRITICAL assigned due to: very high model confidence (100.0%), Protocol Exploit attack type (+5% severity), extreme feature contributions (+8%). Total severity score: 100.0%",
+      "score_breakdown": {
+        "base_confidence": 0.9996,
+        "attack_type_modifier": 0.05,
+        "feature_modifier": 0.08,
+        "total_score": 1.0
+      },
+      "record_id": 20459,
+      "attack_type": "Protocol Exploit"
+    },
+    {
+      "severity": "LOW",
+      "severity_score": 0.5953,
+      "severity_level_info": {
+        "level": 1,
+        "color": "green",
+        "description": "Low-confidence detection, requires monitoring only",
+        "actions": [
+          "Monitor traffic patterns",
+          "Log for analysis"
+        ],
+        "escalation_required": false
+      },
+      "description": "Low-confidence detection, requires monitoring only",
+      "recommended_actions": [
+        "Monitor traffic patterns",
+        "Log for analysis"
+      ],
+      "escalation_required": false,
+      "reasoning": "Severity LOW assigned due to: lower model confidence (54.5%), Protocol Exploit attack type (+5% severity). Total severity score: 59.5%",
+      "score_breakdown": {
+        "base_confidence": 0.5453,
+        "attack_type_modifier": 0.05,
+        "feature_modifier": 0.0,
+        "total_score": 0.5953
+      },
+      "record_id": 13908,
+      "attack_type": "Protocol Exploit"
+    },
+    {
+      "severity": "CRITICAL",
+      "severity_score": 1.0,
+      "severity_level_info": {
+        "level": 4,
+        "color": "red",
+        "description": "Very high confidence with severe indicators, auto-block recommended",
+        "actions": [
+          "Apply auto-blocking",
+          "Escalate to SOC immediately",
+          "Activate incident response"
+        ],
+        "escalation_required": true
+      },
+      "description": "Very high confidence with severe indicators, auto-block recommended",
+      "recommended_actions": [
+        "Apply auto-blocking",
+        "Escalate to SOC immediately",
+        "Activate incident response"
+      ],
+      "escalation_required": true,
+      "reasoning": "Severity CRITICAL assigned due to: very high model confidence (99.9%), Protocol Exploit attack type (+5% severity), extreme feature contributions (+8%). Total severity score: 100.0%",
+      "score_breakdown": {
+        "base_confidence": 0.9991,
+        "attack_type_modifier": 0.05,
+        "feature_modifier": 0.08,
+        "total_score": 1.0
+      },
+      "record_id": 3190,
+      "attack_type": "Protocol Exploit"
+    },
+    {
+      "severity": null,
+      "severity_score": 0.0,
+      "description": "No attack detected - no severity assessment needed",
+      "recommended_actions": [],
+      "escalation_required": false,
+      "reasoning": "Traffic classified as normal",
+      "record_id": 13417,
+      "attack_type": "None"
+    },
+    {
+      "severity": null,
+      "severity_score": 0.0,
+      "description": "No attack detected - no severity assessment needed",
+      "recommended_actions": [],
+      "escalation_required": false,
+      "reasoning": "Traffic classified as normal",
+      "record_id": 8457,
+      "attack_type": "None"
+    }
+  ],
+  "statistics": {
+    "total_assessments": 3,
+    "level_counts": {
+      "LOW": 1,
+      "MEDIUM": 0,
+      "HIGH": 0,
+      "CRITICAL": 2
+    },
+    "level_percentages": {
+      "LOW": 33.33,
+      "MEDIUM": 0.0,
+      "HIGH": 0.0,
+      "CRITICAL": 66.67
+    },
+    "escalation_required_count": 2,
+    "escalation_percentage": 66.67,
+    "average_severity_score": 0.8651,
+    "most_severe_level": "CRITICAL"
+  }
+}

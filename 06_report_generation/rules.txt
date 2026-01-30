@@ -1,7 +1,0 @@
-Report Generation Rules:
-1. All text must be plain text.
-2. Do not use markdown formatting characters such as '#' or '*'.
-3. This report is for Phase 1 of the project, covering work completed for Review 2.
-4. The scope is limited to Objective 1 (Data Processing) and Objective 2 (Model Training).
-5. Content related to XAI (SHAP, LIME) and the Mitigation Engine (Objectives 3 and 4) should only be mentioned as part of the long-term project vision in the introduction. They are out of scope for the detailed methodology, implementation, and results of this Phase 1 report.
-6. If any provided information (like a file) cannot be read or understood, I must ask the user for clarification or to provide the content in a different format.
