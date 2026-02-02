@@ -1,7 +1,7 @@
 {
   "test_info": {
     "samples_tested": 5,
-    "model_path": "D:\\Edu\\Final Project\\WorkingDirectory\\CTI_IDS\\03_model_training\\proper_training\\models\\xgboost\\xgboost_model.pkl",
+    "model_path": "d:\\Edu\\Final Project\\WorkingDirectory\\CTI_IDS\\03_model_training\\proper_training\\models\\xgboost\\xgboost_model.pkl",
     "data_source": "Training data (X_train_scaled.csv)"
   },
   "explanations": [

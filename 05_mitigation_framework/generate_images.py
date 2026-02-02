@@ -76,13 +76,34 @@ def generate_shap_summary_plot():
     else:
         shap_vals = shap_values
 
-    # Create figure
-    plt.figure(figsize=(10, 8))
+    # Create clean, simple figure
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    # Generate SHAP summary plot with clean styling
     shap.summary_plot(shap_vals, X_sample, feature_names=FEATURE_NAMES, show=False)
-    plt.title('SHAP Feature Importance for DoS Detection', fontsize=14, fontweight='bold')
+
+    # Get current axes
+    ax = plt.gca()
+
+    # Clean, simple labels
+    ax.set_xlabel('SHAP Value (Impact on Prediction)', fontsize=13, fontweight='bold')
+    ax.set_ylabel('Feature', fontsize=13, fontweight='bold')
+
+    # Simple, clear title
+    plt.title('Feature Importance for DoS Detection', fontsize=15, fontweight='bold', pad=15)
+
+    # Adjust colorbar
+    cbar = plt.gcf().axes[-1]
+    cbar.set_ylabel('Feature Value\n(Low ← → High)', rotation=-90, va='bottom',
+                    fontsize=11, fontweight='bold')
+
+    # Increase tick label size for readability
+    ax.tick_params(axis='both', which='major', labelsize=11)
+    cbar.tick_params(labelsize=10)
+
     plt.tight_layout()
 
-    # Save
+    # Save with high quality
     output_path = os.path.join(XAI_IMAGES_DIR, '07_shap_summary_plot.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
@@ -168,11 +189,11 @@ def generate_shap_waterfall_dos():
     ax.set_title(f'SHAP Explanation for DoS Detection\n(Prediction: DoS, Confidence: {best_conf*100:.1f}%)',
                  fontsize=12, fontweight='bold')
 
-    # Add legend
+    # Add legend in top right corner to avoid overlap
     from matplotlib.patches import Patch
     legend_elements = [Patch(facecolor='#ff0d57', label='Increases DoS likelihood'),
                        Patch(facecolor='#1e88e5', label='Decreases DoS likelihood')]
-    ax.legend(handles=legend_elements, loc='lower right')
+    ax.legend(handles=legend_elements, loc='upper right', fontsize=10, framealpha=0.9)
 
     plt.tight_layout()
 
@@ -256,11 +277,11 @@ def generate_shap_waterfall_normal():
     ax.set_title(f'SHAP Explanation for Normal Traffic\n(Prediction: Normal, Confidence: {best_conf*100:.1f}%)',
                  fontsize=12, fontweight='bold')
 
-    # Add legend
+    # Add legend in top right corner to avoid overlap
     from matplotlib.patches import Patch
     legend_elements = [Patch(facecolor='#ff0d57', label='Increases DoS likelihood'),
                        Patch(facecolor='#1e88e5', label='Decreases DoS likelihood')]
-    ax.legend(handles=legend_elements, loc='lower right')
+    ax.legend(handles=legend_elements, loc='upper right', fontsize=10, framealpha=0.9)
 
     plt.tight_layout()
 
