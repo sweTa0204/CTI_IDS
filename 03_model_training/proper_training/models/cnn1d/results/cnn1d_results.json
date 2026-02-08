@@ -1,0 +1,51 @@
+{
+  "model": "1D-CNN",
+  "parameters": {
+    "filters": [
+      64,
+      128
+    ],
+    "kernel_size": 3,
+    "dropout_rate": 0.3,
+    "learning_rate": 0.001,
+    "epochs": 100,
+    "batch_size": 64
+  },
+  "default": {
+    "accuracy": 0.939813575409477,
+    "precision": 0.6399376515413925,
+    "recall": 0.9036439227194913,
+    "f1_score": 0.7492649295346243,
+    "auc": 0.9780053637643513,
+    "confusion_matrix": [
+      [
+        34921,
+        2079
+      ],
+      [
+        394,
+        3695
+      ]
+    ],
+    "threshold": 0.5
+  },
+  "optimized": {
+    "accuracy": 0.9741780038453114,
+    "precision": 0.9091891891891892,
+    "recall": 0.8226950354609929,
+    "f1_score": 0.8637822570291437,
+    "auc": 0.9780053637643513,
+    "confusion_matrix": [
+      [
+        36664,
+        336
+      ],
+      [
+        725,
+        3364
+      ]
+    ],
+    "threshold": 0.87
+  },
+  "optimal_threshold": 0.87
+}

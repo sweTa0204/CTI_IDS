@@ -1,0 +1,54 @@
+{
+  "model": "LSTM",
+  "architecture": {
+    "lstm_units": 64,
+    "dropout_rate": 0.3,
+    "learning_rate": 0.001,
+    "sequence_length": 1,
+    "epochs_trained": 100,
+    "batch_size": 64
+  },
+  "default_threshold": {
+    "threshold": 0.5,
+    "accuracy": 0.9151111002944827,
+    "precision": 0.5448173005219985,
+    "recall": 0.8933724627048178,
+    "f1_score": 0.676857513433389,
+    "auc": 0.9683079983872355,
+    "confusion_matrix": [
+      [
+        33948,
+        3052
+      ],
+      [
+        436,
+        3653
+      ]
+    ]
+  },
+  "optimized_threshold": {
+    "threshold": 0.79,
+    "accuracy": 0.9689211224415294,
+    "precision": 0.881236442516269,
+    "recall": 0.7948153582783076,
+    "f1_score": 0.8357978655008358,
+    "auc": 0.9683079983872355,
+    "confusion_matrix": [
+      [
+        36562,
+        438
+      ],
+      [
+        839,
+        3250
+      ]
+    ]
+  },
+  "comparison_with_xgboost": {
+    "lstm_f1": 0.8357978655008358,
+    "xgboost_f1": 0.9057,
+    "note": "LSTM captures temporal patterns, XGBoost better for tabular data"
+  },
+  "training_date": "2026-02-03 17:09:48",
+  "tensorflow_version": "2.20.0"
+}
