@@ -202,14 +202,14 @@ class AttackClassifier:
             if dur_shap > 0.3:
                 score += 0.3
 
-        # Slowloris typically has low rate contribution or negative
+        # Slowloris typically has negative rate contribution (rate pushes toward Normal)
         rate_shap = shap_values.get('rate', 0)
-        if rate_shap < 0.1:  # Low or negative rate contribution
+        if rate_shap <= 0:  # Rate pushing toward Normal = low-rate attack
             score += 0.2
 
         # Check for high sbytes over time (persistent connection)
         sbytes_shap = shap_values.get('sbytes', 0)
-        if sbytes_shap > 0.2 and rate_shap < 0.1:
+        if sbytes_shap > 0.2 and rate_shap <= 0:
             score += 0.2
 
         # Bonus if dur is #1 top feature

@@ -172,7 +172,7 @@ def demo_pipeline(sample_index=None, find_dos=True):
     # Create SHAP dictionary
     shap_dict = {name: float(sv[i]) for i, name in enumerate(FEATURE_NAMES)}
 
-    # Sort by absolute value
+    # Sort by absolute value for display (shows all features by magnitude)
     sorted_shap = sorted(shap_dict.items(), key=lambda x: abs(x[1]), reverse=True)
 
     print("\n  SHAP Values (Feature Contributions to DoS Prediction):")
@@ -185,8 +185,12 @@ def demo_pipeline(sample_index=None, find_dos=True):
         print(f"    {name:<10} {value:>+12.4f}  {direction:<10} {bar}")
     print("  " + "-" * 50)
 
-    # Top features
-    top_features = [f[0] for f in sorted_shap[:3]]
+    # Top features: only those with positive SHAP (pushing toward DoS)
+    dos_features = sorted(
+        [(k, v) for k, v in shap_dict.items() if v > 0],
+        key=lambda x: x[1], reverse=True,
+    )
+    top_features = [f[0] for f in dos_features[:3]]
     print(f"\n  TOP 3 CONTRIBUTING FEATURES: {', '.join(top_features)}")
     print(f"\n  EXPLANATION: This traffic was flagged as DoS primarily because of")
     print(f"               high {top_features[0]} and {top_features[1]} values.")

@@ -1,0 +1,175 @@
+/* ================================================================
+   XAI-Powered DoS Detection Dashboard — Clean White Theme
+   Publication-grade styling for Springer/IEEE screenshots
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ---- Base (exclude Material Icon elements) ---- */
+html, body, .stApp, .stMarkdown, .stButton, .stMetric,
+.stDataFrame, .stSelectbox, .stSlider, .stFileUploader,
+.stExpander, .stTabs, .block-container, .stCaption {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.stApp {
+    background-color: #FFFFFF;
+}
+
+/* ---- Hide Streamlit branding (keep top nav visible) ---- */
+footer { visibility: hidden; }
+[data-testid="stToolbarActions"] { display: none; }
+[data-testid="stAppDeployButton"] { display: none; }
+[data-testid="stMainMenu"] { display: none; }
+
+/* ---- Top Navigation Bar ---- */
+[data-testid="stHeader"] {
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E5EA;
+}
+[data-testid="stTopNavLink"] {
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 20px;
+    letter-spacing: -0.2px;
+}
+
+/* ---- Content padding ---- */
+.block-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* ---- Metric cards ---- */
+[data-testid="stMetric"] {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5EA;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+[data-testid="stMetricLabel"] {
+    font-size: 0.85rem;
+    color: #86868B;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+[data-testid="stMetricValue"] {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1D1D1F;
+}
+
+/* ---- Tabs ---- */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 4px;
+    border-bottom: 2px solid #E5E5EA;
+}
+.stTabs [data-baseweb="tab"] {
+    border-radius: 8px 8px 0 0;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* ---- Buttons ---- */
+.stButton > button {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    letter-spacing: -0.2px;
+}
+
+/* ---- Dataframe ---- */
+[data-testid="stDataFrame"] {
+    border: 1px solid #E5E5EA;
+    border-radius: 10px;
+}
+
+/* ---- File uploader ---- */
+[data-testid="stFileUploader"] section {
+    border: 2px dashed #D1D1D6;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+/* ---- Status container ---- */
+[data-testid="stStatusWidget"] {
+    border: 1px solid #E5E5EA;
+    border-radius: 12px;
+}
+
+/* ---- Severity badges (used via st.markdown) ---- */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+.badge-critical { background: #FF3B30; color: white; }
+.badge-high     { background: #FF9500; color: white; }
+.badge-medium   { background: #FFCC00; color: #1D1D1F; }
+.badge-low      { background: #34C759; color: white; }
+.badge-normal   { background: #E5E5EA; color: #3A3A3C; }
+.badge-dos      { background: #FF3B30; color: white; }
+
+/* ---- Terminal command blocks ---- */
+.cmd-block {
+    background: #1D1D1F;
+    color: #34C759;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.8rem;
+    margin: 4px 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* ---- Section dividers ---- */
+hr {
+    border: none;
+    border-top: 1px solid #E5E5EA;
+    margin: 1.5rem 0;
+}
+
+/* ---- Header banner ---- */
+.header-banner {
+    background: linear-gradient(135deg, #1D1D1F 0%, #3A3A3C 100%);
+    padding: 1.8rem 2rem;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+.header-banner h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+.header-banner p {
+    margin: 4px 0 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+}
+
+/* ---- Pipeline flow ---- */
+.pipeline-step {
+    display: inline-block;
+    background: #F5F5F7;
+    border: 1px solid #E5E5EA;
+    border-radius: 10px;
+    padding: 8px 14px;
+    margin: 3px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #1D1D1F;
+}
+.pipeline-arrow {
+    display: inline-block;
+    color: #C7C7CC;
+    margin: 0 3px;
+    font-size: 1.1rem;
+}

@@ -94,9 +94,20 @@ def explain_single_with_threshold(explainer, features, record_id, threshold=0.5)
     # Create SHAP value dictionary
     shap_dict = {fn: float(sv[i]) for i, fn in enumerate(feature_names)}
 
-    # Get top features (sorted by absolute SHAP value)
-    sorted_features = sorted(shap_dict.items(), key=lambda x: abs(x[1]), reverse=True)
-    top_features = [f[0] for f in sorted_features]
+    # Select top features pushing TOWARD the prediction
+    if prediction == 1:  # DoS
+        # Positive SHAP = pushes toward DoS class
+        directional = sorted(
+            [(k, v) for k, v in shap_dict.items() if v > 0],
+            key=lambda x: x[1], reverse=True,
+        )
+    else:  # Normal
+        # Negative SHAP = pushes toward Normal class
+        directional = sorted(
+            [(k, v) for k, v in shap_dict.items() if v < 0],
+            key=lambda x: abs(x[1]), reverse=True,
+        )
+    top_features = [f[0] for f in directional]
 
     # Feature values dictionary
     feature_values = {fn: float(features_array[0][i]) for i, fn in enumerate(feature_names)}

@@ -129,11 +129,24 @@ class SHAPExplainer:
         for i, fname in enumerate(self.feature_names):
             feature_contributions[fname] = float(sv[i])
 
-        # Sort by absolute contribution to get top features
-        sorted_features = sorted(feature_contributions.items(),
-                                 key=lambda x: abs(x[1]),
-                                 reverse=True)
-        top_features = [f[0] for f in sorted_features[:3]]
+        # Select top features pushing TOWARD the prediction
+        if prediction == 1:  # DoS
+            # Positive SHAP = pushes toward DoS class
+            directional = sorted(
+                [(k, v) for k, v in feature_contributions.items() if v > 0],
+                key=lambda x: x[1], reverse=True,
+            )
+        else:  # Normal
+            # Negative SHAP = pushes toward Normal class
+            directional = sorted(
+                [(k, v) for k, v in feature_contributions.items() if v < 0],
+                key=lambda x: abs(x[1]), reverse=True,
+            )
+        # Fallback to absolute sort if no features match the expected direction
+        if not directional:
+            directional = sorted(feature_contributions.items(),
+                                 key=lambda x: abs(x[1]), reverse=True)
+        top_features = [f[0] for f in directional[:3]]
 
         # Get base value
         if isinstance(self.explainer.expected_value, (list, np.ndarray)):
