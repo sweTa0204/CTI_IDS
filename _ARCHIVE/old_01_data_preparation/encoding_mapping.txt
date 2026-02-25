@@ -1,7 +1,0 @@
-CATEGORICAL ENCODING MAPPING
-========================================
-Generated: 2025-09-01 15:45:06
-
-
-Feature: proto
---------------------

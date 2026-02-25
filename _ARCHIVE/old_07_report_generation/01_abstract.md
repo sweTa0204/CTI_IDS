@@ -1,7 +1,0 @@
-This report details the work completed in Phase 1 of a multi-phase project aimed at developing an intelligent, explainable Denial-of-Service (DoS) detection system. Current DoS detection methods often operate as "black boxes," providing alerts without clear explanations, which hinders effective and rapid incident response.
-
-The primary focus of this initial phase was to establish a robust foundation for DoS detection by focusing on data integrity and model performance. Leveraging the UNSW-NB15 dataset, this work implements a rigorous data preprocessing and feature engineering pipeline to create a balanced, high-quality dataset optimized for machine learning. This involved a systematic process of feature selection using correlation analysis, variance thresholding, and statistical testing, resulting in a refined 10-feature set.
-
-Following data preparation, a comprehensive evaluation of multiple machine learning algorithms was conducted. Models were trained and optimized using Grid Search and cross-validation techniques. The XGBoost model was identified as the champion, demonstrating superior performance in key metrics such as precision and F1-score.
-
-The successful completion of Phase 1 yields a highly accurate baseline detection model and a validated data processing methodology. This foundational work is critical for the subsequent phases of the project, which will focus on integrating Explainable AI (XAI) frameworks to enhance model transparency and developing an automated mitigation engine.

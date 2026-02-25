@@ -1,6 +1,0 @@
-,accuracy,precision,recall,f1_score,roc_auc,training_time
-XGBoost,95.54,96.27,94.74,95.5,99.13,0.2361
-Random Forest,95.29,96.84,93.64,95.21,99.01,0.3463
-Neural Network,92.48,96.27,88.39,92.16,97.35,1.569
-SVM,90.04,94.44,85.09,89.52,95.34,1.5238
-Logistic Regression,78.18,77.09,80.2,78.61,85.3,0.0096
